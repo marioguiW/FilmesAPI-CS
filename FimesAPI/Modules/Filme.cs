@@ -4,6 +4,8 @@ namespace FimesAPI.Modules;
 
 public class Filme
 {
+    [Key]
+    [Required]
     public int Id { get; set; }
     [Required(ErrorMessage = "O titulo do filme deve ser obrigatorio")]
     public string Titulo {  get; set; }

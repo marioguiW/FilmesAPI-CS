@@ -1,3 +1,7 @@
+using FimesAPI.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
+
 namespace FimesAPI
 {
     public class Program
@@ -5,6 +9,17 @@ namespace FimesAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var connectionString = builder.Configuration.GetConnectionString("FilmeConnection");
+
+            builder.Services.AddDbContext<FilmeContext>(opts =>
+                opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            builder.Services.AddControllers().AddNewtonsoftJson();
+
+
 
             // Add services to the container.
 
